@@ -245,3 +245,16 @@ a {
     color: #555;
     cursor: pointer;
 }
+
+.outer-table {
+    margin: 10px;
+}
+
+.specs-table th {
+    min-width: 200px;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}

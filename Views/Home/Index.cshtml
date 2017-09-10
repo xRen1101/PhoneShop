@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
 <div class="all-products page visible">
@@ -34,30 +34,43 @@
 
     <!-- Product in catalog -->
     <ul class="products-list">
-        <li id="products-template" data-index="1">
-            <a href="#product/1">
-                <div class="product-photo"><img src="~/images/sony-xperia-z3.jpg" height="130" alt="Sony Xperia Z3"/></div>
-                <h2>Sony Xperia Z3</h2>
+    @foreach (var product in Model)
+    {
+        <li id="products-template" data-index=@product.ProductId>
+            <a href="#product/@(product.ProductId)">
+                <div class="product-photo"><img src="~/@(product.Pictures.Small)" height="130" alt=@product.Name /></div>
+                <h2>@product.Name</h2>
                 <div class="product-description">
                     <button class="btn btn-primary">Buy</button>
-                    <p class="product-price">899 €</p>
+                    <p class="product-price">@product.Price €</p>
                 </div>
                 <div class="highlight"></div>
             </a>
         </li>
+    }
     </ul>
+</div>
 
-</div>
-<!-- Product view -->
-<div class="single-product page" id="1">
-    <div class="overlay"></div>
-    <div class="preview-large">
-        <h3>Sony Xperia Z3</h3>
-        <img src="~/images/sony-xperia-z3-large.jpg"/>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra.
-            Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.
-        </p>
-        <span class="close">×</span>
+@foreach (var product in Model)
+{
+    <!-- Product view -->
+    <div class="single-product page" id=@product.ProductId>
+        <div class="overlay"></div>
+        <div class="preview-large">
+            <h3>@product.Name</h3>
+            <img src="~/@(product.Pictures.Large)"/>
+            <div class="outer-table">
+                <table class="center">
+                    @foreach (var spec in product.Specifications) 
+                    {
+                        <tr>
+                            <th>@spec.Type</th>
+                            <td>@spec.Value</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <span class="close">×</span>
+        </div>
     </div>
-</div>
+}
