@@ -12,7 +12,7 @@ namespace PhoneShop.Controllers
     public class HomeController : Controller
     {
         private IProductFacade _productFacade;
-        
+
         public HomeController(IProductFacade productFacade)
         {
             _productFacade = productFacade;
@@ -23,6 +23,14 @@ namespace PhoneShop.Controllers
             var products = _productFacade.GetPrudocts();
             
             return View(products);
+        }
+
+        [HttpGet]
+        public IActionResult GetProducts(string manufacturer, string storage, string os)
+        {
+            var products = _productFacade.GetPrudocts(manufacturer, storage, os);
+
+            return Json(products);
         }
 
         public IActionResult Error()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Models;
+using PhoneShop.Extensions;
 
 namespace PhoneShop.Facades 
 {
@@ -14,12 +15,16 @@ namespace PhoneShop.Facades
             _dbContext = dbContext;
         }
 
-        public List<Product> GetPrudocts() 
+        public List<Product> GetPrudocts(string manufacturer = null, string storage = null, string os = null) 
         {
-            return _dbContext.Products
+            var productsQuery = _dbContext.Products
                 .Include(p => p.Specifications)
                 .Include(p => p.Pictures)
-                .ToList();
+                .ApplyFilter(manufacturer, "Manufacturer")
+                .ApplyFilter(storage, "Storage")
+                .ApplyFilter(os, "OS");
+
+            return productsQuery.ToList();
         }
     }
 }
