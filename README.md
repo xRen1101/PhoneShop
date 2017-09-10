@@ -25,3 +25,8 @@ SQLite database file is already included in repository, but if you want to creat
 ```
 dotnet ef database update
 ```
+### Editing code
+
+Editor used to create this project is [Visual Studio Code](https://code.visualstudio.com/), I also recommend to install [C# Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) through VSCode Extensions Manager.
+
+Also you can use any other Editor or IDE if you would like to.
